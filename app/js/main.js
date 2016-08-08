@@ -1,37 +1,46 @@
-let images = ['../images/space01.jpg', '../images/space02.jpg', '../images/space03.jpg'];
+(function() {
+'use strict';
 
-loadImage = (url) => {
-	let img = new Image(200, 200);
-	img.src = url;
+// let images = ['../images/space01.jpg',
+//     '../images/space02.jpg',
+//     '../images/space03.jpg'
+// ];
 
-	console.log(document.querySelectorAll('.app'));
-	document.querySelectorAll('.app')[0].appendChild(img);
-}
+// let loadImage = (url) => {
+//     let img = new Image(200, 200);
+//     img.src = url;
 
-loadImageCallback = (url, callback) => {
-	let img = new Image(200, 200);
+//     console.log(document.querySelectorAll('.app'));
+//     document.querySelectorAll('.app')[0].appendChild(img);
+// };
 
-	img.onload = () => {
-		callback(null, img);
-	}
+let loadImageCallback = (url, callback) => {
+    let img = new Image(200, 200);
 
-	img.onerror = () =>{
-		let message = 'Can\'t loaded image ' + url;
-		callback(new Error(message));
-	}
+    img.onload = () => {
+        callback(null, img);
+      };
 
-	img.src = url;
-}
+    img.onerror = () => {
+        let message = 'Can\'t loaded image ' + url;
+        callback(new Error(message));
+      };
 
-addImage = (src) => {
-	document.querySelector('.app').appendChild(src);
-}
+    img.src = url;
+  };
+
+let addImage = (src) => {
+    document.querySelector('.app').appendChild(src);
+  };
 
 document.onreadystatechange = () => {
-  if (document.readyState === 'complete') {
-    	loadImageCallback('../images/space01.jpg', (error, img) =>{
-    		if(error) throw error;
-    		addImage(img);
-    	});
-  }
-};
+    if (document.readyState === 'complete') {
+      loadImageCallback('../images/space01.jpg', (error, img) => {
+          if (error) {
+            throw error;
+          }
+          addImage(img);
+        });
+    }
+  };
+}());

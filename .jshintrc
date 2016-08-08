@@ -1,0 +1,17 @@
+{
+	"maxerr": 30,
+	"camelcase" : true,
+	"esversion": 6,
+	"undef": true,
+	"quotmark": "single",
+	"maxlen": 80,
+	"trailing": true,
+	"curly": true,
+	"strict": true,
+	"bitwise": true,
+	"browser": true,
+	"devel": true,
+	"latedef": true,
+	"eqeqeq" : true,
+	"unused" : true
+}
