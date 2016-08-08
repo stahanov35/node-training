@@ -1,2 +1,3 @@
-# node-training
-Grunt, Gulp examples.
+# Sandbox for ES2015
+
+* Promises

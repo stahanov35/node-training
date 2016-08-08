@@ -1,0 +1,23 @@
+{
+  "name": "node-training",
+  "version": "1.0.0",
+  "description": "Sandbox for ES2015",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "http-server ./app"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stahanov35/node-training.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stahanov35/node-training/issues"
+  },
+  "homepage": "https://github.com/stahanov35/node-training#readme",
+  "devDependencies": {
+    "http-server": "^0.9.0"
+  }
+}
