@@ -15,32 +15,44 @@
 // };
 
 let loadImageCallback = (url, callback) => {
-    let img = new Image(200, 200);
+  let img = new Image(200, 200);
 
-    img.onload = () => {
-        callback(null, img);
-      };
-
-    img.onerror = () => {
-        let message = 'Can\'t loaded image ' + url;
-        callback(new Error(message));
-      };
-
-    img.src = url;
+  img.onload = () => {
+    callback(null, img);
   };
+
+  img.onerror = () => {
+    let message = 'Can\'t loaded image ' + url;
+    callback(new Error(message));
+  };
+
+  img.src = url;
+};
 
 let addImage = (src) => {
-    document.querySelector('.app').appendChild(src);
-  };
+  document.querySelector('.app').appendChild(src);
+};
 
 document.onreadystatechange = () => {
-    if (document.readyState === 'complete') {
-      loadImageCallback('../images/space01.jpg', (error, img) => {
+  if (document.readyState === 'complete') {
+    loadImageCallback('../images/space01.jpg', (error, img) => {
+      if (error) {
+        throw error;
+      }
+      addImage(img);
+      loadImageCallback('../images/space02.jpg', (error, img) => {
+        if (error) {
+          throw error;
+        }
+        addImage(img);
+        loadImageCallback('../images/space03.jpg', (error, img) => {
           if (error) {
             throw error;
           }
           addImage(img);
         });
-    }
-  };
+      });
+    });
+  }
+};
 }());
