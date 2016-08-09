@@ -14,44 +14,40 @@
 //     document.querySelectorAll('.app')[0].appendChild(img);
 // };
 
-let loadImageCallback = (url, callback) => {
-  let img = new Image(200, 200);
+let loadImage = (url) => {
+  return new Promise((resolve, reject) => {
+    let img = new Image(200, 200);
 
-  img.onload = () => {
-    callback(null, img);
-  };
+    img.onload = () => {
+      resolve(img);
+    };
 
-  img.onerror = () => {
-    let message = 'Can\'t loaded image ' + url;
-    callback(new Error(message));
-  };
+    img.onerror = () => {
+      reject(new Error('Can\'t loaded image ' + url));
+    };
 
-  img.src = url;
+    img.src = url;
+  });
 };
 
-let addImage = (src) => {
-  document.querySelector('.app').appendChild(src);
+let addImage = (img) => {
+  document.querySelector('.app').appendChild(img);
 };
 
 document.onreadystatechange = () => {
   if (document.readyState === 'complete') {
-    loadImageCallback('../images/space01.jpg', (error, img) => {
-      if (error) {
-        throw error;
-      }
-      addImage(img);
-      loadImageCallback('../images/space02.jpg', (error, img) => {
-        if (error) {
-          throw error;
-        }
+    Promise.all([
+      loadImage('../images/space01.jpg'),
+      loadImage('../images/space02.jpg'),
+      loadImage('../images/space03.jpg')
+    ])
+    .then(images => {
+      images.forEach((img) => {
         addImage(img);
-        loadImageCallback('../images/space03.jpg', (error, img) => {
-          if (error) {
-            throw error;
-          }
-          addImage(img);
-        });
       });
+    })
+    .catch((error) => {
+      console.log(error);
     });
   }
 };
